@@ -1,0 +1,4 @@
+name: JavaPlugin
+version: '${project.version}'
+main: dev.mrdragon.javaplugin.Plugin
+api-version: '1.16'
