@@ -1,0 +1,17 @@
+{
+  "name": "discord.js",
+  "version": "1.0.0",
+  "description": "BOT from discord.js integrated with a minecraft 1.16.5 spingot/bukkit plugin via APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cls && node index.js"
+  },
+  "author": "Yuri",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.15.2",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.18.2"
+  }
+}
