@@ -1,5 +1,5 @@
 const { db } = require('../Utils/bases')
-const { Errors, Files } = require('../Utils/functions')
+const { Errors, Files } = require('../Utils/Functions')
 
 let routes = Files('./src/Routes/', '../../Routes', 1)
 

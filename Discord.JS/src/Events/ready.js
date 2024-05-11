@@ -1,3 +1,4 @@
+const { Errors } = require('../Utils/Functions');
 const { ActivityType } = require("discord.js")
 
 const event = async (client) => {
@@ -13,8 +14,9 @@ const event = async (client) => {
       ],
     });
   } catch(err) {
-    console.log(err)
-    console.log(`[ERROR Events/ready]=> ${err}`)
+    return Errors(err, `Routes ${__filename}`)
+      .then(() => { return route(req, res) })
+      .catch((e) => { return res.status(e.status || 500).send(e) })
   }
 }
 

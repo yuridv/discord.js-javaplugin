@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="mongodb.driver" type="repository">
+    <properties maven-id="org.mongodb:mongodb-driver:3.12.14">
+      <exclude>
+        <dependency maven-id="org.mongodb:mongodb-driver" />
+        <dependency maven-id="org.mongodb:mongodb-driver-core" />
+        <dependency maven-id="org.mongodb:bson" />
+      </exclude>
+    </properties>
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

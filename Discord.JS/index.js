@@ -14,15 +14,17 @@ express
   .get('*', routes)
   .post('*', routes)
   .delete('*', routes)
-  .put('*', routes);
+  .put('*', routes)
 
 server
   .listen(process.env.PORT || 3000, async (err) => {
     if (err) return console.log(`[Listen Error]=> `, err)
-    console.log(`[Discord.JS API]=> Successfully Loaded!`)
+    console.log(`[API RESTful]=> Started Successfully!`)
   });
 
-const { Files } = require('./src/Utils/functions');
+const mongodb = require('./src/Utils/Database/mongodb')
+
+const { Files } = require('./src/Utils/Functions');
 const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 
 const client = new Client({
@@ -51,7 +53,7 @@ let Commands = Files('./src/Commands/', '../../Commands', 0, 1);
 for (let c in Commands) client.commands.push({ name: c, ...Commands[c] });
 
 let rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
-rest.put(Routes.applicationCommands(process.env.BOT_ID), { body: client.commands });    
+rest.put(Routes.applicationCommands(process.env.BOT_ID), { body: client.commands });
 
 client.login(process.env.TOKEN)
   .catch((err) => console.log(`[Discord.JS BOT]=> Login Error:\n${err}`));

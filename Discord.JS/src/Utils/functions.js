@@ -1,1 +1,0 @@
-module.exports = require('./Functions/Files')('./src/Utils/Functions/', '.', null)

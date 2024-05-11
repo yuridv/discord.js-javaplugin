@@ -5,7 +5,7 @@ const route = (base, path, lower, folders, dir = '', obj = {}) => {
     let file_dir = file
     if (lower) file = file.toLowerCase()
     file = file.split('.')
-    if (!dir && ['routes'].includes(file[0].toLowerCase())) return;
+    if (!dir && ['routes', 'index'].includes(file[0].toLowerCase())) return;
     if (file[1] == 'js') {
       let route = require(`${path}/${dir}/${file[0]}`)
       if (['get','post','put','delete'].includes(file[0])) {
