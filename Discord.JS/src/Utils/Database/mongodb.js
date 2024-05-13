@@ -11,7 +11,8 @@ mongoose.connect(process.env.MONGO_DB)
 
 let Player = new mongoose.Schema({
   _id: String,
-  nickname: String,
+  discord: String,
+  code: String,
   money: Number,
   level: Number,
   xp: Number

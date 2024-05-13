@@ -2,3 +2,11 @@ name: JavaPlugin
 version: '${project.version}'
 main: dev.mrdragon.javaplugin.Plugin
 api-version: '1.16'
+
+commands:
+  dslink:
+    description: Vincule a sua conta com o discord
+    usage: /dslink
+  dscollect:
+    description: Colete o xp obtido no discord
+    usage: /dscollect
