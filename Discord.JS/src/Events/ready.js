@@ -1,4 +1,4 @@
-const { Errors } = require('../Utils/Functions');
+const { Errors, Files, Timeout } = require('../Utils/Functions');
 const { ActivityType } = require("discord.js")
 
 const event = async (client) => {
@@ -13,10 +13,16 @@ const event = async (client) => {
         { name: `Desenvolvido pelo MrDragon`, type: ActivityType.Watching },
       ],
     });
+
+    let Automatic = Files('./src/Automatic/', '../../Automatic', 0, 1);
+    for (let a in Automatic) {
+      await Timeout((Math.floor(Math.random() * (30 - 5 + 1)) + 5) * 60 * 1000);
+      Automatic[a](client);
+    }
   } catch(err) {
-    return Errors(err, `Routes ${__filename}`)
-      .then(() => { return route(req, res) })
-      .catch((e) => { return res.status(e.status || 500).send(e) })
+    return Errors(err, `Event ${__filename}`)
+      .then(() => event(client))
+      .catch((e) => e)
   }
 }
 

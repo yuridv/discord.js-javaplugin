@@ -1,14 +1,17 @@
 package dev.mrdragon.javaplugin.restAPI;
 
+import dev.mrdragon.javaplugin.restAPI.Routes.Player.Linked;
+import dev.mrdragon.javaplugin.restAPI.Routes.Player.UnLinked;
+import dev.mrdragon.javaplugin.restAPI.Routes.Player.Status;
+import dev.mrdragon.javaplugin.restAPI.Routes.Events.Spawned;
 import dev.mrdragon.javaplugin.utils.Config;
 import io.javalin.Javalin;
 import io.javalin.core.util.JavalinLogger;
-import org.bson.Document;
 
 public class API {
     Config config = new Config();
 
-    Javalin app;
+    public Javalin app;
 
     public void Connect() {
         if (app == null) {
@@ -23,10 +26,11 @@ public class API {
             app = Javalin.create()
                     .start(PORT);
 
-            app.get("*", (r) -> {
-                System.out.println("[JavaPlugin API]=> Request received!");
-                r.status(200).result("Hello World");
-            });
+            app.post("/player/linked", Linked::new);
+            app.post("/player/unlinked", UnLinked::new);
+            app.get("/player/status", Status::new);
+
+            app.post("/events/spawned", Spawned::new);
 
             Thread.currentThread().setContextClassLoader(classLoader);
 

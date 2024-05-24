@@ -5,8 +5,11 @@ api-version: '1.16'
 
 commands:
   dslink:
-    description: Vincule a sua conta com o discord
+    description: Vincule a sua conta do minecraft com o discord.
     usage: /dslink
-  dscollect:
-    description: Colete o xp obtido no discord
-    usage: /dscollect
+  dsunlink:
+    description: Desvincule a sua conta do minecraft com o discord.
+    usage: /dsunlink
+  test:
+    description: Comando teste.
+    usage: /test

@@ -29,7 +29,7 @@ const route = (data, timer = {}, ignore = {}) => new Promise(async (res,rej) => 
     }
     return res(date);
   } catch(err) {
-    return Errors(err, `FUNCTIONS ${__filename}`)
+    return Errors(err, `Functions ${__filename}`)
       .then(() => {
         return route(inputs, proc, db)
           .then((r) => res(r))

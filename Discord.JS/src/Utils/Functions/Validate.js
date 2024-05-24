@@ -38,7 +38,7 @@ const route = (body, camps, error = '') => new Promise(async (res,rej) => {
       return res(body)
     } else return res(body)
   } catch(err) {
-    return Errors(err, `Validate ${__filename}`)
+    return Errors(err, `Functions ${__filename}`)
       .then(() => { return route(req) })
       .catch((e) => rej(e))
   }

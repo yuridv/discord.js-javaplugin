@@ -1,6 +1,7 @@
 package dev.mrdragon.javaplugin.commands;
 
 import dev.mrdragon.javaplugin.database.MongoDB;
+import dev.mrdragon.javaplugin.utils.Config;
 import org.bson.Document;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class dsLink implements CommandExecutor {
+    Config config = new Config();
     MongoDB db;
 
     public dsLink(MongoDB database) {
@@ -18,7 +20,7 @@ public class dsLink implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            System.out.println("Você não pode utilizar esse comando pelo console...");
+            System.out.println(config.get("MESSAGE") + "§3Você não pode utilizar esse comando pelo console...");
         } else {
             Player player = (Player) sender;
             Document table = db.Players.find(new Document("_id", player.getName())).first();
@@ -27,24 +29,33 @@ public class dsLink implements CommandExecutor {
                 int code = Code();
 
                 Document insert = new Document("_id", player.getName())
-                        .append("code", code);
+                        .append("discord", "")
+                        .append("code", code)
+                        .append("money", 0)
+                        .append("money_total", 0)
+                        .append("level", 0)
+                        .append("xp", 0)
+                        .append("chests", 0);
 
                 db.Players.insertOne(insert);
 
-                player.sendMessage("Vá ao nosso discord e digite: /dslink " + code);
+                player.sendMessage(config.get("MESSAGE") + "§eVá ao nosso discord e digite: §3/link " + code);
             } else {
                 String discord = (String) table.get("discord");
 
                 if (!table.get("code").equals(0)) {
-                    player.sendMessage("Vá ao nosso discord e digite: /dslink " + table.get("code"));
+                    player.sendMessage(config.get("MESSAGE") + "§eVá ao nosso discord e digite: §3/link " + table.get("code"));
                 } else if (discord == null || discord.isEmpty()) {
                     int code = Code();
 
-                    db.Players.replaceOne(new Document("_id", player.getName()), new Document("code", code));
+                    Document update = new Document(table)
+                            .append("code", code);
 
-                    player.sendMessage("Vá ao nosso discord e digite: /dslink " + code);
+                    db.Players.replaceOne(table, update);
+
+                    player.sendMessage(config.get("MESSAGE") + "§eVá ao nosso discord e digite: §3/link " + code);
                 } else {
-                    player.sendMessage("Conta verificada!");
+                    player.sendMessage(config.get("MESSAGE") + "§aA sua conta já está vinculada!");
                 }
             }
         }
