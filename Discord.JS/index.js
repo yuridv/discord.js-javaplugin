@@ -1,32 +1,11 @@
 require('dotenv-safe').config();
 console.log(`[Discord.JS]=> Starting...`);
 
-const Express = require('express');
-const express = Express();
-
-const server = require('http').createServer(express);
-
-const routes = require('./src/Routes/routes');
-
-express
-  .use(Express.json())
-
-  .get('*', routes)
-  .post('*', routes)
-  .delete('*', routes)
-  .put('*', routes)
-
-server
-  .listen(process.env.PORT || 3000, async (err) => {
-    if (err) return console.log(`[Listen Error]=> `, err)
-    console.log(`[API RESTful]=> Started Successfully!`)
-  });
-
-
+const { db } = require('./src/Utils/Bases');
 const { Files } = require('./src/Utils/Functions');
 const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 
-const client = new Client({
+db.client = new Client({
   status: 'online',
   autoReconnect: true,
   interval: 60,
@@ -44,15 +23,35 @@ const client = new Client({
 });
 
 let Events = Files('./src/Events/', '../../Events', 0, 1);
-for (let e in Events) client.on(e, Events[e].bind(null, client));
+for (let e in Events) db.client.on(e, Events[e].bind(null, db.client));
 
-client.commands = [];
+db.client.commands = [];
 let Commands = Files('./src/Commands/', '../../Commands', 0, 1);
 
-for (let c in Commands) client.commands.push({ name: c, ...Commands[c] });
+for (let c in Commands) db.client.commands.push({ name: c, ...Commands[c] });
 
 let rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
-rest.put(Routes.applicationCommands(process.env.BOT_ID), { body: client.commands });
+rest.put(Routes.applicationCommands(process.env.BOT_ID), { body: db.client.commands });
 
-client.login(process.env.BOT_TOKEN)
+db.client.login(process.env.BOT_TOKEN)
   .catch((err) => console.log(`[Discord.JS BOT]=> Login Error:\n${err}`));
+
+const Express = require('express');
+const express = Express();
+
+const server = require('http').createServer(express);
+const routes = require('./src/Routes/routes');
+
+express
+  .use(Express.json())
+
+  .get('*', routes)
+  .post('*', routes)
+  .delete('*', routes)
+  .put('*', routes)
+
+server
+  .listen(process.env.PORT || 3000, async (err) => {
+    if (err) return console.log(`[Listen Error]=> `, err)
+    console.log(`[API RESTful]=> Started Successfully!`)
+  });

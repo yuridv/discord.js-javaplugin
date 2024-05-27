@@ -4,8 +4,10 @@ import dev.mrdragon.javaplugin.commands.dsUnLink;
 import dev.mrdragon.javaplugin.commands.dsLink;
 import dev.mrdragon.javaplugin.commands.test;
 import dev.mrdragon.javaplugin.database.MongoDB;
+import dev.mrdragon.javaplugin.listeners.MenuInteraction;
 import dev.mrdragon.javaplugin.restAPI.API;
 import dev.mrdragon.javaplugin.utils.Config;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,6 +26,8 @@ public final class Plugin extends JavaPlugin implements CommandExecutor {
         getCommand("dslink").setExecutor(new dsLink(db));
         getCommand("dsunlink").setExecutor(new dsUnLink(db));
         getCommand("test").setExecutor(new test(db, this.getDataFolder()));
+
+        Bukkit.getPluginManager().registerEvents(new MenuInteraction(), this);
     }
 
     @Override

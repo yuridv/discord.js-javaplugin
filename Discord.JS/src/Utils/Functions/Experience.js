@@ -5,12 +5,12 @@ const route = (player, xp, message) => new Promise(async (res,rej) => {
   try {
     player.xp = (player.xp + xp).toFixed(0);
 
-    let next = ((player.level * 1.2) * 500) + 1000
+    let next = ((player.level * 1.8) * 500) + 1000
     if (player.xp >= next) {
       player.level += 1;
       player.xp = (player.xp - next).toFixed(0);
 
-      next = ((player.level * 1.2) * 500) + 1000
+      next = ((player.level * 1.8) * 500) + 1000
       if (player.xp >= next) {
         return route(player, 0, message)
           .then((r)=> res(r))

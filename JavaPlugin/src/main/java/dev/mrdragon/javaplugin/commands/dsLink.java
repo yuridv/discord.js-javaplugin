@@ -1,6 +1,7 @@
 package dev.mrdragon.javaplugin.commands;
 
 import dev.mrdragon.javaplugin.database.MongoDB;
+import dev.mrdragon.javaplugin.menus.dsLinkMenu;
 import dev.mrdragon.javaplugin.utils.Config;
 import org.bson.Document;
 import org.bukkit.command.Command;
@@ -55,7 +56,7 @@ public class dsLink implements CommandExecutor {
 
                     player.sendMessage(config.get("MESSAGE") + "§eVá ao nosso discord e digite: §3/link " + code);
                 } else {
-                    player.sendMessage(config.get("MESSAGE") + "§aA sua conta já está vinculada!");
+                    player.openInventory(new dsLinkMenu().buildInventory(player, table));
                 }
             }
         }

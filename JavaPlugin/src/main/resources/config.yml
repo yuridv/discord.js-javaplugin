@@ -3,3 +3,6 @@ PORT: 3002
 MONGO_DB: "mongodb+srv://discordplugin:discordplugin123@discordjs-javaplugin.fv5pi3x.mongodb.net/"
 
 MESSAGE: "§9§l[DISCORD] "
+
+DISCORD_API: "http://localhost:3000"
+DISCORD_TOKEN: "123"

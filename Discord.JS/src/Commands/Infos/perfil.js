@@ -46,7 +46,7 @@ const command = async (client, interaction, args) => {
       .addFields(
         { name: `**> :video_game: Conta do Minecraft:**`, value: `\`\`\`• ${player._id}\`\`\`` },
         { name: `**> :star2: Level:**`, value: `\`\`\`• ${player.level}\`\`\``, inline: true },
-        { name: `**> ✨ Experiência:**`, value: `\`\`\`• ${player.xp}/${(((player.level * 1.2) * 500) + 1000).toFixed(0)}\`\`\``, inline: true },
+        { name: `**> ✨ Experiência:**`, value: `\`\`\`• ${player.xp}/${(((player.level * 1.8) * 500) + 1000).toFixed(0)}\`\`\``, inline: true },
         { name: `**> ${status.emoji} Player Status:**`, value: `\`\`\`• ${status.text}\`\`\`` },
         { name: `**> 💸 Discord Money:**`, value: `\`\`\`• ${player.money}\`\`\``, inline: true },
         { name: `**> 💰 Total Money:**`, value: `\`\`\`• ${player.money_total}\`\`\``, inline: true },
