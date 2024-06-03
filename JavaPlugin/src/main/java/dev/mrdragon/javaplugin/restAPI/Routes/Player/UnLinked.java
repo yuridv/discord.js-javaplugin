@@ -22,7 +22,7 @@ public class UnLinked {
                 Document error = new Document("error", "O player passado não está online...");
                 req.json(error);
             } else {
-                p.sendTitle("§l§4Conta Desvinculada", "§l§4❌ §cA sua conta foi desvinculada do nosso discord!", 10, 200, 20);
+                p.sendTitle("§l§4Conta Desvinculada", "§l§4✘ §cA sua conta foi desvinculada do nosso discord!", 10, 200, 20);
                 p.playSound(p.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
                 req.json(new Document("status", "success"));
             }

@@ -38,7 +38,7 @@ public class dsUnLink implements CommandExecutor {
 
                     db.Players.replaceOne(table, update);
 
-                    player.sendTitle("§l§4Conta Desvinculada", "§l§4❌ §cA sua conta foi desvinculada do nosso discord!", 10, 200, 20);
+                    player.sendTitle("§l§4Conta Desvinculada", "§l§4✘ §cA sua conta foi desvinculada do nosso discord!", 10, 200, 20);
                     player.playSound(player.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
                     player.sendMessage(config.get("MESSAGE") + "§eA sua conta foi §6desvinculada §edo discord!");
                 }

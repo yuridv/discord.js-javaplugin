@@ -1,8 +1,19 @@
 PORT: 3002
+MONGO_DB: 'mongodb+srv://discordplugin:discordplugin123@discordjs-javaplugin.fv5pi3x.mongodb.net/'
 
-MONGO_DB: "mongodb+srv://discordplugin:discordplugin123@discordjs-javaplugin.fv5pi3x.mongodb.net/"
+MESSAGE: '§9§l[DISCORD] '
 
-MESSAGE: "§9§l[DISCORD] "
+DISCORD_API: 'http://localhost:3000'
 
-DISCORD_API: "http://localhost:3000"
-DISCORD_TOKEN: "123"
+DISCORD_TOKEN: '123'
+
+COLLECT_ITEM_1: "DIAMOND"
+COLLECT_QUANTY_1: 3
+COLLECT_ITEM_2: "GOLD_INGOT"
+COLLECT_QUANTY_2: 5
+COLLECT_ITEM_3: "IRON_INGOT"
+COLLECT_QUANTY_3: 8
+COLLECT_ITEM_4: "NETHERITE_INGOT"
+COLLECT_QUANTY_4: 1
+COLLECT_ITEM_5: "REDSTONE"
+COLLECT_QUANTY_5: 16

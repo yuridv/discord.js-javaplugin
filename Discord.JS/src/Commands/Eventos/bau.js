@@ -49,7 +49,7 @@ const command = async (client, interaction, args) => {
     db.events.chests.splice(db.events.chests.findIndex((r) => r.user == bau.user && r.code == bau.code), 1);
 
     let types = [
-      { min: 95, name: "Lendário", bonus: { min: 3000, max: 3500, item: 2 } },
+      { min: 0, name: "Lendário", bonus: { min: 3000, max: 3500, item: 2 } },
       { min: 80, name: "Épico", bonus: { min: 2000, max: 3000, item: 1 } },
       { min: 60, name: "Raro", bonus: { min: 1500, max: 2000 } },
       { min: 40, name: "Incomum", bonus: { min: 1000, max: 1500 } },
@@ -62,6 +62,17 @@ const command = async (client, interaction, args) => {
     let xp = Math.floor(Math.random() * (type.bonus.max - type.bonus.min + 1)) + type.bonus.min;
     let money = Math.floor(Math.random() * (type.bonus.max - type.bonus.min + 1)) + type.bonus.min;
 
+    let items = [];
+    if (type.bonus.item) {
+      let chance = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+
+      if (chance < 50) items.push(Math.floor(Math.random() * (5 - 1 + 1)) + 1);
+      if ((chance < 20 || chance > 80) && type.bonus.item == 2) items.push(Math.floor(Math.random() * (5 - 1 + 1)) + 1);
+    }
+
+    if (!player.items) player.items = [];
+    for (let i of items) player.items.push(i);
+    
     player.money += money;
     player.chests += 1;
     await Experience(player, xp, interaction);
@@ -72,7 +83,7 @@ const command = async (client, interaction, args) => {
 • Senha do Baú: \`${bau.code}\`
 • Raridade do Baú: **_${type.name}_**`)
       .addFields(
-        { name: `**> ${emoji.project_chest} Foi encontrado:**`, value: `\`\`\`• R$ ${money},00\`\`\`` },
+        { name: `**> ${emoji.project_chest} Foi encontrado:**`, value: `\`\`\`• R$ ${money},00\n${items.length > 0 ? `• ${items.length}x Item Raro` : ''}\`\`\``},
         { name: `**> ✨ Experiência ganha:**`, value: `\`\`\`• ${xp}\`\`\`` },
         { name: `**> ${emoji.chest} Baús abertos:**`, value: `\`\`\`• ${player.chests}\`\`\`` },
       )

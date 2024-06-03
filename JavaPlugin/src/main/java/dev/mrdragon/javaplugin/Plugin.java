@@ -20,6 +20,8 @@ public final class Plugin extends JavaPlugin implements CommandExecutor {
     public void onEnable() {
         System.out.println("[JavaPlugin Server]=> Started Successfully!");
 
+        loadConfig();
+
         db.Connect();
         api.Connect();
 
@@ -27,7 +29,7 @@ public final class Plugin extends JavaPlugin implements CommandExecutor {
         getCommand("dsunlink").setExecutor(new dsUnLink(db));
         getCommand("test").setExecutor(new test(db, this.getDataFolder()));
 
-        Bukkit.getPluginManager().registerEvents(new MenuInteraction(), this);
+        Bukkit.getPluginManager().registerEvents(new MenuInteraction(db), this);
     }
 
     @Override
@@ -36,5 +38,10 @@ public final class Plugin extends JavaPlugin implements CommandExecutor {
         if (api.app != null) {
             api.app.close();
         }
+    }
+
+    private void loadConfig() {
+        getConfig().options().copyDefaults(true);
+        saveConfig();
     }
 }

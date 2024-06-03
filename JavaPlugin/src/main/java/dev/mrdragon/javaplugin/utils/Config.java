@@ -16,7 +16,10 @@ public class Config {
     public String get(String key) {
         Object result = env.get(key);
 
-        if (result == null) throw new RuntimeException("A config '" + key + "' não foi configurada ainda...");
+        if (result == null) {
+            System.out.println("A config '" + key + "' não foi configurada ainda...");
+            return "Undefined";
+        }
 
         if (result instanceof String) {
             return (String) result;

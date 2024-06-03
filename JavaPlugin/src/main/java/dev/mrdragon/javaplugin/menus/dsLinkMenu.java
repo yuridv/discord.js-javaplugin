@@ -12,18 +12,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public class dsLinkMenu {
     Config config = new Config();
 
-    public dsLinkMenu() {
-
-    }
-
-    public Inventory buildInventory(Player player, Document table) {
+    public Inventory buildInventory(Player player, Document table, Document server) {
         Inventory inventory = Bukkit.createInventory(null, 3 * 9, config.get("MESSAGE"));
+
+        if (server == null) server = new Document("_id", "TODOS")
+                .append("taxa", 15);
 
         String discord = table.get("discord").toString();
 
@@ -44,11 +46,11 @@ public class dsLinkMenu {
             } else if (i == 10) {
                 item = new ItemStack(Material.SUNFLOWER);
                 meta = item.getItemMeta();
-                meta.setDisplayName("§l§6★ §aConverter Moedas");
+                meta.setDisplayName("§6★ §aConverter Moedas");
                 meta.setLore(asList(
-                        "  §l§c✂ §eTaxa de Conversão: §c00§7%",
+                        "  §c✂ §eTaxa de Conversão: §c" + server.get("taxa") + "§7%",
                         " ",
-                        "  §l§3➠ §7Aqui você pode converter suas",
+                        "  §3➠ §7Aqui você pode converter suas",
                         "     §7moedas em outros tipos de moedas,",
                         "     §7para obter VIP's, itens e entre outros!"
                 ));
@@ -62,30 +64,51 @@ public class dsLinkMenu {
                         " §2↑ §a§lPlayer XP: §d" + table.get("xp") + "/" + Math.round((((int) table.get("level") * 1.8) * 500) + 1000),
                         " ",
                         " §2♢ §c§lDiscord Coin's: §6" + table.get("money"),
-                        "  §l§3➠ §7São moedas que só podem ser ganhas",
+                        "  §3➠ §7São moedas que só podem ser ganhas",
                         "     §7no Discord através de eventos, permitindo",
                         "     §7comprar beneficios ou itens pelo discord!",
                         " ",
                         " §2✧ §3§lTotal Coin's: §6" + table.get("money_total"),
-                        "  §l§3➠ §7São moedas que só podem ser ganhas",
+                        "  §3➠ §7São moedas que só podem ser ganhas",
                         "     §7convertendo seus Discord Coin's, permitindo",
                         "     §7comprar itens exclusivos ou trocar por cash!"
                 ));
                 item.setItemMeta(head);
             } else if (i == 16) {
+                List<String> listStart = Arrays.asList("  §5✴ §eSuas recompensas:");
+
+                ArrayList<String> list = new ArrayList<>(listStart);
+
+                if (table.get("items") != null) {
+                    String[] items = table.get("items").toString()
+                            .replace("[", "")
+                            .replace("]", "")
+                            .trim()
+                            .split(", ");
+                    if (items.length > 0) {
+                        for (int num = 0; num < items.length; num++) {
+                            String collect = config.get("COLLECT_ITEM_" + items[num]);
+                            String quanty = config.get("COLLECT_QUANTY_" + items[num]);
+
+                            if (collect != null) {
+                                Material material = Material.getMaterial(collect);
+                                if (material != null) list.add("    §2• §a" + quanty + " " + material.name());
+                            }
+                        }
+                    } else list.add("    §4✘ §cNada para Coletar!");
+                } else list.add("    §4✘ §cNada para Coletar!");
+
+                list.add(" ");
+                list.add("  §3♢ §7Total de Baús Abertos: §5" + table.get("chests"));
+                list.add(" ");
+                list.add("  §3➠ §7Aqui você pode coletar suas");
+                list.add("     §7recompensas obtidas através de");
+                list.add("     §7eventos que aconteceram no discord!");
+
                 item = new ItemStack(Material.ENDER_CHEST);
                 meta = item.getItemMeta();
-                meta.setDisplayName("§l§d✉ §aBaús do Discord");
-                meta.setLore(asList(
-                        "  §l§5✴ §eSuas recompensas: §5",
-                        "    §l§4✘ §cNada para Coletar!",
-                        " ",
-                        "  §l§3♢ §7Total de Baús Abertos: §5" + table.get("chests"),
-                        " ",
-                        "  §l§3➠ §7Aqui você pode coletar suas",
-                        "     §7recompensas obtidas através de",
-                        "     §7eventos que aconteceram no discord!"
-                ));
+                meta.setDisplayName("§d✉ §aBaús do Discord");
+                meta.setLore(list);
             } else {
                 item = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 meta = item.getItemMeta();

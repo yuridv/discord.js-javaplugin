@@ -56,7 +56,9 @@ public class dsLink implements CommandExecutor {
 
                     player.sendMessage(config.get("MESSAGE") + "§eVá ao nosso discord e digite: §3/link " + code);
                 } else {
-                    player.openInventory(new dsLinkMenu().buildInventory(player, table));
+                    Document server = db.Servers.find(new Document("_id", "TODOS")).first();
+                    player.sendMessage(config.get("MESSAGE") + "§eAbrindo suas informações! Aguarde...");
+                    player.openInventory(new dsLinkMenu().buildInventory(player, table, server));
                 }
             }
         }

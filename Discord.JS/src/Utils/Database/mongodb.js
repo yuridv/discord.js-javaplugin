@@ -17,9 +17,16 @@ let Player = new mongoose.Schema({
   money_total: { type: Number, default: 0 },
   level: { type: Number, default: 0 },
   xp: { type: Number, default: 0 },
+  items: { type: Array, default: [] },
   chests: { type: Number, default: 0 }
 })
 
+let Server = new mongoose.Schema({
+  _id: { type: String },
+  taxa: { type: Number, default: 15 }
+})
+
 module.exports = {
-  Player: mongoose.model('Player', Player)
+  Player: mongoose.model('Player', Player),
+  Server: mongoose.model('Server', Server)
 }
