@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="javaplugin:jar">
-    <output-path>$USER_HOME$/Desktop/Bukkit Server/plugins</output-path>
+    <output-path>$PROJECT_DIR$/../../../Games/Server Paper/plugins</output-path>
     <root id="archive" name="javaplugin.jar">
       <element id="module-output" name="javaplugin" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.5.32/kotlin-stdlib-jdk7-1.5.32.jar" path-in-jar="/" />
