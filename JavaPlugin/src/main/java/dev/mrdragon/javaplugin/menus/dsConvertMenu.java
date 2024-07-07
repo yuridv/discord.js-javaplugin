@@ -61,7 +61,7 @@ public class dsConvertMenu {
                         "  §7[§2+§7] §fClique com o §4Botão Esquerdo §fpara §6Converter",
                         "   §5100 Total Coin's §fem §6" + formatNumber((double) ((100 - (int) server.get("taxa"))) / 100) + " CASH §7(§fTaxa: §c" + server.get("taxa") + "%§7)",
                         " ",
-                        " §2✔ §5Total Coin's §fem §3Discord Coin's",
+                        " §2✔ §6CASH §fem §5Total Coin's",
                         "  §7[§4-§7] §fClique com o §4Botão Direito §fpara §6Converter",
                         "   §61 CASH §fem §5" + formatNumber((double) (100L * (100 - (int) server.get("taxa"))) / 100) + " Total Coin's §7(§fTaxa: §c" + server.get("taxa") + "%§7)"
                 ));
@@ -104,7 +104,7 @@ public class dsConvertMenu {
                         "  §7[§2+§7] §fClique com o §4Botão Esquerdo §fpara §6Converter",
                         "   §5100 Total Coin's §fem §6" + formatNumber((double) ((100 - (int) server.get("taxa"))) / 100) + " CASH §7(§fTaxa: §c" + server.get("taxa") + "%§7)",
                         " ",
-                        " §2✔ §5Total Coin's §fem §3Discord Coin's",
+                        " §2✔ §6CASH §fem §5Total Coin's",
                         "  §7[§4-§7] §fClique com o §4Botão Direito §fpara §6Converter",
                         "   §61 CASH §fem §5" + formatNumber((double) (100L * (100 - (int) server.get("taxa"))) / 100) + " Total Coin's §7(§fTaxa: §c" + server.get("taxa") + "%§7)"
                 ));
